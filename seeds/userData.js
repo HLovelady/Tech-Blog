@@ -8,7 +8,7 @@
       "username": "hlove",
       "password": "tech456",
       "user_admin": false
-    }
+    },
     {
         "username": "loneill",
         "password": "tech789",
