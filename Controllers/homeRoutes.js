@@ -9,7 +9,7 @@ router.get('/', async (req, res) => {
       include: [
         {
           model: User,
-          attributes: ['name'],
+          attributes: ['username'],
         },
       ],
     });
@@ -18,7 +18,7 @@ router.get('/', async (req, res) => {
     const posts = postData.map((post) => post.get({ plain: true }));
 
     
-    res.render('main', { 
+    res.render('login', { 
       posts, 
       logged_in: req.session.logged_in 
     });
@@ -33,7 +33,7 @@ router.get('/post:id', async (req, res) => {
       include: [
         {
           model: User,
-          attributes: ['name'],
+          attributes: ['login'],
         },
         {
           model: Comment,

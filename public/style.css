@@ -11,4 +11,17 @@
     display: flex;
     background-color: gainsboro;
     justify-content: center;
+    justify-items: center;
 }
+input[type=text] {
+    font-weight:bold;
+    border: 2px solid grey;
+    border-radius: 4px;
+    background-color: gainsboro;
+  }
+  input[type=password] {
+    font-weight:bold;
+    border: 2px solid grey;
+    border-radius: 4px;
+    background-color: gainsboro;
+  }
