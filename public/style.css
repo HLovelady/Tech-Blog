@@ -1,0 +1,14 @@
+.nav{
+    background-color: gainsboro;
+}
+#comment{
+    margin-left: auto;
+    margin-right: auto;
+    width:350px;
+}
+
+.body{
+    display: flex;
+    background-color: gainsboro;
+    justify-content: center;
+}
