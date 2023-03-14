@@ -1,30 +1,35 @@
-const express = require('express');
-const path = require('path');
-const exphbs = require('express-handlebars')
 
+const path = require('path');
+const express = require('express');
+const session = require('express-session');
+const exphbs = require('express-handlebars');
+const routes = require('./controllers');
+const sequelize = require('./config/connection');
+const helpers = require('./utils/helpers');
 
 const app = express();
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 3001;
 
-// THIS IS EXPRESS MIDDLEWARE (express config)
-const hbs = exphbs.create();
+// Set up sessions
+const sess = {
+  secret: 'Super secret secret',
+  resave: false,
+  saveUninitialized: true,
+};
+
+app.use(session(sess));
+
+const hbs = exphbs.create({ helpers }); //Handlebars + helpers
 
 app.engine('handlebars', hbs.engine);
 app.set('view engine', 'handlebars');
 
-app.use(express.static(path.join(__dirname, 'public')))
-// this parses the incoming 
-app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+app.use(express.static(path.join(__dirname, 'public')));
 
+app.use(routes);
 
-// TEST ROUTES
-app.get('/', (req, res) => {
-    console.log("hit landing Route")
-    res.render('homepage');
-})
-
-
-app.listen(PORT, () => {
-    console.log(`App listening on port ${PORT}`);
-})
+sequelize.sync({ force: false }).then(() => {
+  app.listen(PORT, () => console.log('Now listening'));
+});
